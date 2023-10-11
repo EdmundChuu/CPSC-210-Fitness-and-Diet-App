@@ -143,15 +143,20 @@ public class FitnessApp {
         System.out.println("Here is your entire Library! Which Exercise would you Like?");
         doGetExerciseLibrary();
         String chosenName = input.next();
-        Exercise eSource = doSelectExercise(chosenName);
-        System.out.println("\n Here is the stats of " + eSource.getName() +
-                "\n Name: " + eSource.getName() +
-                "\n Repetitions: " + eSource.getReps() +
-                "\n Duration: " + eSource.getDuration() +
-                "\n Calories Burnt: " + eSource.getCalories() +
-                "\n \n What would you like to do with "
-                + eSource.getName() + "?");
-        runExerciseMenu(eSource);
+        Exercise esource = doSelectExercise(chosenName);
+        System.out.println("\n Here is the stats of "
+                + esource.getName()
+                + "\n Name: "
+                + esource.getName()
+                + "\n Repetitions: "
+                + esource.getReps()
+                + "\n Duration: "
+                + esource.getDuration()
+                + "\n Calories Burnt: "
+                + esource.getCalories()
+                + "\n \n What would you like to do with "
+                + esource.getName() + "?");
+        runExerciseMenu(esource);
     }
 
     private void doClearExerciseList() {
