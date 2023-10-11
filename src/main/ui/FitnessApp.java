@@ -157,7 +157,7 @@ public class FitnessApp {
 
     private void doClearExerciseList() {
         newRoutine.clearRoutine();
-        System.out.println("Your list is now Empty! Add something to it quickly!(۶•̀ᴗ •́)۶");
+        System.out.println("Your list is now Empty! Add something to it quickly!");
     }
 
     private void doGetExerciseLibrary() {
