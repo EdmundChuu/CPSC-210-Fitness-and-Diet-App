@@ -222,9 +222,9 @@ public class FitnessApp {
     }
 
 
-    private void doRemoveExercise(Exercise eSource) {
-        newRoutine.removeExercise(eSource);
-        System.out.println("\n" + eSource.getName() + " has been Removed! Here is your new RoutineList:\n");
+    private void doRemoveExercise(Exercise esource) {
+        newRoutine.removeExercise(esource);
+        System.out.println("\n" + esource.getName() + " has been Removed! Here is your new RoutineList:\n");
         doGetExerciseLibrary();
     }
 
@@ -235,7 +235,7 @@ public class FitnessApp {
     }
 
 
-    private void doEditExercise(Exercise eSource) {
+    private void doEditExercise(Exercise esource) {
         boolean keepGoingExerciseEditLevel = true;
         String commandExerciseEditLevel;
 
@@ -247,33 +247,33 @@ public class FitnessApp {
                 case "1":
                     System.out.println("\nAmazing! Enter a new name for your new Exercise Routine!");
                     String newName = input.next();
-                    eSource.changeName(newName);
+                    esource.changeName(newName);
                     keepGoingExerciseEditLevel = false;
 
                     break;
                 case "2":
                     System.out.println("\nAmazing! Enter your reps for your new Exercise Routine!");
                     int newReps = input.nextInt();
-                    eSource.changeRepetition(newReps);
+                    esource.changeRepetition(newReps);
 
                     break;
                 case "3":
                     System.out.println("\nAmazing! Enter your duration for your new Exercise Routine!");
                     double newDuration = input.nextDouble();
-                    eSource.changeDuration(newDuration);
+                    esource.changeDuration(newDuration);
 
                     break;
                 case "4":
                     System.out.println("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
                     int newCalorie = input.nextInt();
-                    eSource.changeCalories(newCalorie);
+                    esource.changeCalories(newCalorie);
                 case "q":
                     keepGoingExerciseEditLevel = false;
                 default:
                     System.out.println("Selection not valid...");
                     break;
             }
-            System.out.println("\nNew exercise Routine " + eSource.getName() + " has been edited!\n");
+            System.out.println("\nNew exercise Routine " + esource.getName() + " has been edited!\n");
         }
     }
 
