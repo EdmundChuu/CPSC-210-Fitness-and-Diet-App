@@ -87,8 +87,8 @@ public class FitnessApp {
 
     //MODIFIES: this
     //EFFECTS: Adds new exercise and prevents duplication of exercise names
+    @SuppressWarnings("methodlength")
     private void doNewExercise() {
-        @SuppressWarnings("50")
         String newName = "";  // force entry into loop
 
         while (!newRoutine.noDuplicate(newName) || newName.equals("")) {
@@ -238,9 +238,8 @@ public class FitnessApp {
         System.out.println("\tq -> LEAVE THIS MENU");
     }
 
-
+    @SuppressWarnings("methodlength")
     private void doEditExercise(Exercise esource) {
-        @SuppressWarnings("36")
         boolean keepGoingExerciseEditLevel = true;
         String commandExerciseEditLevel;
 
