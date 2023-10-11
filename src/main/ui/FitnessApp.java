@@ -175,11 +175,12 @@ public class FitnessApp {
 
     private void doGetTotalCalories() {
         int calorieNumber = newRoutine.getTotalCaloriesBurnt();
-        System.out.println("You'll burn " + calorieNumber + " calories If you finish this Routine, " +
-                "don't you want to try it? ");
+        System.out.println("You'll burn "
+                + calorieNumber
+                + " calories If you finish this Routine, don't you want to try it? ");
     }
 
-    ///////////////////////////////////////////////ENTERING EXERCISE LEVEL/////////////////////////////////////////////////
+    ///////////////////////////////////////////////ENTERING EXERCISE LEVEL////////////////////////////////////////////
     private Exercise doSelectExercise(String chosen) {
         while (newRoutine.getExerciseFromName(chosen) == null) {
             System.out.println("Apologies, we don't have that in your library! Please try again?");
@@ -193,7 +194,7 @@ public class FitnessApp {
     }
     ///////////////////////////////////////////////ENTERING EXERCISE LEVEL/////////////////////////////////////////////
 
-    private void runExerciseMenu(Exercise eSource) {
+    private void runExerciseMenu(Exercise esource) {
         boolean keepGoingExerciseLevel = true;
         String commandExerciseLevel;
 
@@ -203,11 +204,11 @@ public class FitnessApp {
 
             switch (commandExerciseLevel) {
                 case "1":
-                    doRemoveExercise(eSource);
+                    doRemoveExercise(esource);
                     keepGoingExerciseLevel = false;
                     break;
                 case "2":
-                    doEditExercise(eSource);
+                    doEditExercise(esource);
                     break;
                 case "q":
                     keepGoingExerciseLevel = false;
