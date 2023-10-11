@@ -32,17 +32,17 @@ public class FitnessApp {
             if (commandRoutineLevel.equals("q")) {
                 keepGoingRoutineLevel = false;
             } else if (commandRoutineLevel.equals("2") && newRoutine.routineIsEmpty()) {
-                System.out.println("ITS EMPTY!!!ლ(ﾟ дﾟლ) ADD SOMETHING!!!");
+                System.out.println("ITS EMPTY!!! ADD SOMETHING!!!");
             }else {
                 processCommandRoutineLevel(commandRoutineLevel);
             }
         }
-        System.out.println("\nGoodbye! (^ _ ^)/~~");
+        System.out.println("\nGoodbye!");
     }
 
     // EFFECTS: displays menu of options to user
     private void displayMenuRoutineLevel() {
-        System.out.println("\nHello, my name is Astraea! How may I help you today? @(≧ᴗ≦*)");
+        System.out.println("\nHello, my name is Astraea! How may I help you today?");
         System.out.println("\t1 -> ADD EXERCISE ROUTINE");
         System.out.println("\t2 -> SELECT EXERCISE");
         System.out.println("\t3 -> CLEAR EXERCISE ROUTINE");
@@ -93,7 +93,7 @@ public class FitnessApp {
                 newName = input.next();
             }
             else if(!newRoutine.noDuplicate(newName)){
-                System.out.println("\n<( •̀ᴖ•́)> Exercise Name Already Exists! Pick a new One!");
+                System.out.println("\nExercise Name Already Exists! Pick a new One!");
                 newName = input.next();
             }
             else if(newRoutine.noDuplicate(newName)){
@@ -108,7 +108,7 @@ public class FitnessApp {
                 break; // Exit the loop if an integer is provided
             } else {
                 input.next(); // Consume invalid input to prevent an infinite loop
-                System.out.println("\nヽ(ﾟДﾟ)ﾉ INPUT INVALID TRY AGAIN PLEASE");
+                System.out.println("\nINPUT INVALID TRY AGAIN PLEASE");
             }
         }
 
@@ -120,7 +120,7 @@ public class FitnessApp {
                 break; // Exit the loop if an integer is provided
             } else {
                 input.next(); // Consume invalid input to prevent an infinite loop
-                System.out.println("\nヽ(ﾟДﾟ)ﾉ INPUT INVALID TRY AGAIN PLEASE");
+                System.out.println("\nINPUT INVALID TRY AGAIN PLEASE");
             }
         }
 
@@ -132,7 +132,7 @@ public class FitnessApp {
                 break; // Exit the loop if an integer is provided
             } else {
                 input.next(); // Consume invalid input to prevent an infinite loop
-                System.out.println("\nヽ(ﾟДﾟ)ﾉ INPUT INVALID TRY AGAIN PLEASE");
+                System.out.println("\nINPUT INVALID TRY AGAIN PLEASE");
             }
         }
         Exercise exercise = new Exercise(newName, newReps, newDuration, newCalorie);
@@ -145,12 +145,12 @@ public class FitnessApp {
         doGetExerciseLibrary();
         String chosenName = input.next();
         Exercise eSource = doSelectExercise(chosenName);
-        System.out.println("\n(°∀°)ゝ” Here is the stats of "+ eSource.getName() +
+        System.out.println("\n Here is the stats of "+ eSource.getName() +
                 "\n Name: " + eSource.getName() +
                 "\n Repetitions: "+ eSource.getReps() +
                 "\n Duration: " + eSource.getDuration() +
                 "\n Calories Burnt: " + eSource.getCalories() +
-                "\n ☆(*^o^)乂(^-^*)乂(*^o^)乂(^-^*)乂(*^o^)乂(^-^*)乂(*^o^)乂(^-^*)☆ \n What would you like to do with "
+                "\n \n What would you like to do with "
                 + eSource.getName() + "?");
         runExerciseMenu(eSource);
     }
@@ -172,13 +172,13 @@ public class FitnessApp {
     private void doGetTotalCalories() {
         int calorieNumber = newRoutine.getTotalCaloriesBurnt();
         System.out.println("You'll burn " + calorieNumber + " calories If you finish this Routine, " +
-                "don't you want to try it? ᕙ(  •̀ ᗜ •́  )ᕗ");
+                "don't you want to try it? ");
     }
 
     ///////////////////////////////////////////////ENTERING EXERCISE LEVEL/////////////////////////////////////////////////
     private Exercise doSelectExercise(String chosen) {
         while (newRoutine.getExerciseFromName(chosen) == null) {
-            System.out.println("Apologies (*╯-╰)ノ, we don't have that in your library! Please try again?");
+            System.out.println("Apologies, we don't have that in your library! Please try again?");
             chosen = input.next();
 
         }
@@ -213,13 +213,13 @@ public class FitnessApp {
             }
         }
 
-        System.out.println("\nGoing Back to Exercise Menu ヾ(。￣□￣)ﾂ");
+        System.out.println("\nGoing Back to Exercise Menu");
     }
 
 
     private void doRemoveExercise(Exercise eSource) {
         newRoutine.removeExercise(eSource);
-        System.out.println("\n(┛◉Д◉) ┛彡┻━┻" + eSource.getName() + " has been Removed! Here is your new RoutineList:\n");
+        System.out.println("\n" + eSource.getName() + " has been Removed! Here is your new RoutineList:\n");
         doGetExerciseLibrary();
     }
 
