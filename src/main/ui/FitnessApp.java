@@ -83,9 +83,12 @@ public class FitnessApp {
         }
     }
 
+
+
     //MODIFIES: this
     //EFFECTS: Adds new exercise and prevents duplication of exercise names
     private void doNewExercise() {
+        @SuppressWarnings("methodlength")
         String newName = "";  // force entry into loop
 
         while (!newRoutine.noDuplicate(newName) || newName.equals("")) {
@@ -134,6 +137,7 @@ public class FitnessApp {
                 System.out.println("\nINPUT INVALID TRY AGAIN PLEASE");
             }
         }
+
         Exercise exercise = new Exercise(newName, newReps, newDuration, newCalorie);
         newRoutine.addExercise(exercise);
         System.out.println("\nNew exercise Routine " + newName + " has been added to your Library!\n");
@@ -236,6 +240,7 @@ public class FitnessApp {
 
 
     private void doEditExercise(Exercise esource) {
+        @SuppressWarnings("methodlength")
         boolean keepGoingExerciseEditLevel = true;
         String commandExerciseEditLevel;
 
@@ -249,19 +254,16 @@ public class FitnessApp {
                     String newName = input.next();
                     esource.changeName(newName);
                     keepGoingExerciseEditLevel = false;
-
                     break;
                 case "2":
                     System.out.println("\nAmazing! Enter your reps for your new Exercise Routine!");
                     int newReps = input.nextInt();
                     esource.changeRepetition(newReps);
-
                     break;
                 case "3":
                     System.out.println("\nAmazing! Enter your duration for your new Exercise Routine!");
                     double newDuration = input.nextDouble();
                     esource.changeDuration(newDuration);
-
                     break;
                 case "4":
                     System.out.println("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
