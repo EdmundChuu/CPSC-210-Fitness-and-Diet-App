@@ -13,9 +13,9 @@ This project is interesting to me because I exercise regularly and I am familiar
 
 ## *User Stories*
 
-- As a user I want to be able to add an exercise to my Exercise Plan and specify name, type of exercise, body part it's working on, calories burnt, number of reps perforemd each set and number of actually performed sets
+- As a user I want to be able to add an exercise to my Exercise Plan and specify name,duration , calories burnt, number of reps performed e
 - As a user I want to view the amount of Exercises to my Exercise Plan
-- - As a user I want to view a list of names of Exercises in my exercise plan
+- As a user I want to view a list of names of Exercises in my exercise plan
 - As a user, I want to be able to mark an exercise as completed in my Exercise Plan
 - As a user, I want to be able to remove a Exercise from my Exercise Plan
-- As a user, I want to be able to see  statistics  of what types of exercises I have done within the list
+- As a user, I wat to edit a exercise within a Routine List
