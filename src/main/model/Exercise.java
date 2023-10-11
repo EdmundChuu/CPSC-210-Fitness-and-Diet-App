@@ -22,25 +22,25 @@ public class Exercise {
 
     // MODIFIES: this
     // EFFECTS: changes the name variable
-    public void changeName(String newName){
+    public void changeName(String newName) {
         this.name = newName;
     }
 
     // MODIFIES: this
     // EFFECTS: changes the name variable
-    public void changeRepetition(int newRepetition){
+    public void changeRepetition(int newRepetition) {
         this.repetitions = newRepetition;
     }
 
     // MODIFIES: this
     // EFFECTS: changes the Calories variable
-    public void changeCalories(int newCalories){
+    public void changeCalories(int newCalories) {
         this.calories = newCalories;
     }
 
     // MODIFIES: this
     // EFFECTS: changes the Duration variable
-    public void changeDuration(double newDuration){
+    public void changeDuration(double newDuration) {
         this.duration = newDuration;
     }
 
@@ -49,11 +49,17 @@ public class Exercise {
         return name;
     }
 
-    public int getReps() {return repetitions;}
+    public int getReps() {
+        return repetitions;
+    }
 
-    public double getDuration() {return duration;}
+    public double getDuration() {
+        return duration;
+    }
 
-    public int getCalories() {return calories;}
+    public int getCalories() {
+        return calories;
+    }
 
 
 }

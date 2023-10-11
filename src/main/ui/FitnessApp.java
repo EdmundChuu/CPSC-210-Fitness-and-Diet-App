@@ -1,4 +1,5 @@
 package ui;
+
 import model.Exercise;
 import model.RoutineList;
 
@@ -33,7 +34,7 @@ public class FitnessApp {
                 keepGoingRoutineLevel = false;
             } else if (commandRoutineLevel.equals("2") && newRoutine.routineIsEmpty()) {
                 System.out.println("ITS EMPTY!!! ADD SOMETHING!!!");
-            }else {
+            } else {
                 processCommandRoutineLevel(commandRoutineLevel);
             }
         }
@@ -91,12 +92,10 @@ public class FitnessApp {
             if (newName.equals("")) {
                 System.out.println("\nAmazing! Enter a new name for your new Exercise Routine!");
                 newName = input.next();
-            }
-            else if(!newRoutine.noDuplicate(newName)){
+            } else if (!newRoutine.noDuplicate(newName)) {
                 System.out.println("\nExercise Name Already Exists! Pick a new One!");
                 newName = input.next();
-            }
-            else if(newRoutine.noDuplicate(newName)){
+            } else if (newRoutine.noDuplicate(newName)) {
                 newName = input.next();
             }
         }
@@ -136,7 +135,7 @@ public class FitnessApp {
             }
         }
         Exercise exercise = new Exercise(newName, newReps, newDuration, newCalorie);
-      newRoutine.addExercise(exercise) ;
+        newRoutine.addExercise(exercise);
         System.out.println("\nNew exercise Routine " + newName + " has been added to your Library!\n");
     }
 
@@ -145,9 +144,9 @@ public class FitnessApp {
         doGetExerciseLibrary();
         String chosenName = input.next();
         Exercise eSource = doSelectExercise(chosenName);
-        System.out.println("\n Here is the stats of "+ eSource.getName() +
+        System.out.println("\n Here is the stats of " + eSource.getName() +
                 "\n Name: " + eSource.getName() +
-                "\n Repetitions: "+ eSource.getReps() +
+                "\n Repetitions: " + eSource.getReps() +
                 "\n Duration: " + eSource.getDuration() +
                 "\n Calories Burnt: " + eSource.getCalories() +
                 "\n \n What would you like to do with "
@@ -271,6 +270,7 @@ public class FitnessApp {
             System.out.println("\nNew exercise Routine " + eSource.getName() + " has been edited!\n");
         }
     }
+
     private void displayMenuExerciseEditLevel() {
         System.out.println("\t1 -> CHANGE NAME");
         System.out.println("\t2 -> CHANGE REPETITION");
