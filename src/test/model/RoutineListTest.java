@@ -1,6 +1,9 @@
 package model;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RoutineListTest {
@@ -17,9 +20,12 @@ public class RoutineListTest {
 
     @Test
     void testGetTotalCalories() {
+        assertEquals(0, testRoutine.getTotalCaloriesBurnt());
         testRoutine.addExercise(pushUp);
         testRoutine.addExercise(sitUp);
         assertEquals(4500, testRoutine.getTotalCaloriesBurnt());
+        testRoutine.removeExercise(sitUp);
+        assertEquals(1500, testRoutine.getTotalCaloriesBurnt());
     }
 
     @Test
@@ -38,14 +44,6 @@ public class RoutineListTest {
         assertEquals(1, testRoutine.routineSize());
     }
 
-    @Test
-    void testremoveExercise() {
-        assertTrue(testRoutine.addExercise(pushUp));
-        assertTrue(testRoutine.addExercise(sitUp));
-        testRoutine.removeExercise(sitUp);
-        assertEquals(1, testRoutine.routineSize());
-    }
-
 
     @Test
     void testRemoveExercise() {
@@ -53,6 +51,7 @@ public class RoutineListTest {
         assertTrue(testRoutine.addExercise(sitUp));
         testRoutine.removeExercise(sitUp);
         assertEquals(1, testRoutine.routineSize());
+        assertEquals(pushUp, testRoutine.getExerciseList().get(0));
     }
 
     @Test
@@ -61,5 +60,14 @@ public class RoutineListTest {
         assertTrue(testRoutine.addExercise(sitUp));
         testRoutine.clearRoutine();
         assertTrue(testRoutine.routineIsEmpty());
+    }
+
+    @Test
+    void testGetExerciseList() {
+        assertTrue(testRoutine.addExercise(pushUp));
+        assertTrue(testRoutine.addExercise(sitUp));
+        assertEquals(2, testRoutine.getExerciseList().size());
+        assertEquals(pushUp, testRoutine.getExerciseList().get(0));
+        assertEquals(sitUp, testRoutine.getExerciseList().get(1));
     }
 }

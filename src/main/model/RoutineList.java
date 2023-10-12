@@ -7,7 +7,6 @@ import java.util.ArrayList;
 // Represents a RoutineList Object containing n account having an id, owner name and balance (in dollars)
 public class RoutineList {
     private final String routineName;
-    private int totalCalories;
     private final List<Exercise> exercises;
 
     //  REQUIRES: accountName has a non-zero length
@@ -15,20 +14,19 @@ public class RoutineList {
 //           Exercise objects
     public RoutineList(String routineName) {
         this.routineName = routineName;
-        this.totalCalories = 0;
         this.exercises = new ArrayList<>();
     }
 
     // EFFECTS: Adds up total calories of each exercise within the list and returns it
     public int getTotalCaloriesBurnt() {
         if (this.exercises.isEmpty()) {
-            return this.totalCalories;
+            return 0;
         }
-
+        int tempTotal = 0;
         for (Exercise e : exercises) {
-            this.totalCalories = this.totalCalories + e.getCalories();
+            tempTotal = tempTotal + e.getCalories();
         }
-        return this.totalCalories;
+        return tempTotal;
     }
 
     // EFFECTS: Returns exercise list within the Routine
@@ -70,7 +68,7 @@ public class RoutineList {
     }
 
     // MODIFIES: this
-    // EFFECTS: Removes  an Exercise Object to the exercise list within RoutineList
+    // EFFECTS: Removes  an Exercise Object from the exercise list within RoutineList
     public void removeExercise(Exercise exercise) {
         exercises.remove(exercise);
     }
@@ -79,11 +77,6 @@ public class RoutineList {
     // EFFECTS: Removes all Exercise Objects to the exercise list within RoutineList
     public void clearRoutine() {
         exercises.clear();
-    }
-
-    // EFFECTS: Obtains name of Routine
-    public String getRoutineName() {
-        return this.routineName;
     }
 
     // EFFECTS: Obtains the size exercise list within RoutineList
