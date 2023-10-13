@@ -87,9 +87,9 @@ public class FitnessApp {
 
     //MODIFIES: this
     //EFFECTS: Adds new exercise and prevents duplication of exercise names
-    @SuppressWarnings("methodlength")
+
     private void doNewExercise() {
-        String newName = "";  // force entry into loop
+                String newName = "";  // force entry into loop
 
         while (!newRoutine.noDuplicate(newName) || newName.equals("")) {
             if (newName.equals("")) {
@@ -102,45 +102,42 @@ public class FitnessApp {
                 newName = input.next();
             }
         }
-        System.out.println("\nAmazing! Enter your reps for your new Exercise Routine!");
-        int newReps;
-        while (true) {
-            if (input.hasNextInt()) {
-                newReps = input.nextInt();
-                break; // Exit the loop if an integer is provided
-            } else {
-                input.next(); // Consume invalid input to prevent an infinite loop
-                System.out.println("\nINPUT INVALID TRY AGAIN PLEASE");
-            }
-        }
-
-        System.out.println("\nAmazing! Enter your duration for your new Exercise Routine!");
-        double newDuration;
-        while (true) {
-            if (input.hasNextDouble()) {
-                newDuration = input.nextDouble();
-                break; // Exit the loop if an integer is provided
-            } else {
-                input.next(); // Consume invalid input to prevent an infinite loop
-                System.out.println("\nINPUT INVALID TRY AGAIN PLEASE");
-            }
-        }
-
-        System.out.println("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
-        int newCalorie;
-        while (true) {
-            if (input.hasNextInt()) {
-                newCalorie = input.nextInt();
-                break; // Exit the loop if an integer is provided
-            } else {
-                input.next(); // Consume invalid input to prevent an infinite loop
-                System.out.println("\nINPUT INVALID TRY AGAIN PLEASE");
-            }
-        }
+        int newReps = getIntInput("\nAmazing! Enter your reps for your new Exercise Routine!");
+        double newDuration = getDoubleInput("\nAmazing! Enter your duration for your new Exercise Routine!");
+        int newCalorie = getIntInput("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
 
         Exercise exercise = new Exercise(newName, newReps, newDuration, newCalorie);
         newRoutine.addExercise(exercise);
+
         System.out.println("\nNew exercise Routine " + newName + " has been added to your Library!\n");
+    }
+
+    private int getIntInput(String prompt) {
+        int inputValue;
+        while (true) {
+            System.out.println(prompt);
+            if (input.hasNextInt()) {
+                inputValue = input.nextInt();
+                break;
+            }
+            input.next();
+            System.out.println("\nINPUT INVALID. TRY AGAIN, PLEASE.");
+        }
+        return inputValue;
+    }
+
+    private double getDoubleInput(String prompt) {
+        double inputValue;
+        while (true) {
+            System.out.println(prompt);
+            if (input.hasNextDouble()) {
+                inputValue = input.nextDouble();
+                break;
+            }
+            input.next();
+            System.out.println("\nINPUT INVALID. TRY AGAIN, PLEASE.");
+        }
+        return inputValue;
     }
 
     private void doChooseExercise() {
@@ -275,8 +272,13 @@ public class FitnessApp {
                     break;
             }
             System.out.println("\nNew exercise Routine " + esource.getName() + " has been edited!\n");
+            }
         }
-    }
+
+
+
+
+
 
     private void displayMenuExerciseEditLevel() {
         System.out.println("\t1 -> CHANGE NAME");
