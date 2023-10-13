@@ -85,7 +85,7 @@ public class FitnessApp {
 
 
 
-    //MODIFIES: this
+    //MODIFIES: this(adds enw object to list), Exercise object
     //EFFECTS: Adds new exercise and prevents duplication of exercise names
 
     private void doNewExercise() {
@@ -112,6 +112,8 @@ public class FitnessApp {
         System.out.println("\nNew exercise Routine " + newName + " has been added to your Library!\n");
     }
 
+
+    //EFFECTS: is used in doNewExercise to check if the user input is an integer
     private int getIntInput(String prompt) {
         int inputValue;
         while (true) {
@@ -126,6 +128,7 @@ public class FitnessApp {
         return inputValue;
     }
 
+    //EFFECTS: is used in doNewExercise to check if the user input is a double
     private double getDoubleInput(String prompt) {
         double inputValue;
         while (true) {
@@ -140,6 +143,7 @@ public class FitnessApp {
         return inputValue;
     }
 
+    //EFFECTS: EFFECTS: prompts user to select an exercise to take action on
     private void doChooseExercise() {
         System.out.println("Here is your entire Library! Which Exercise would you Like?");
         doGetExerciseLibrary();
@@ -160,11 +164,14 @@ public class FitnessApp {
         runExerciseMenu(esource);
     }
 
+    //MODIFIES: this
+    //EFFECTS: Empties the entire routine list
     private void doClearExerciseList() {
         newRoutine.clearRoutine();
         System.out.println("Your list is now Empty! Add something to it quickly!");
     }
 
+    //EFFECTS: Obtains the list of exercises within the Routine list
     private void doGetExerciseLibrary() {
         int index = 0;
         List<Exercise> routine = newRoutine.getExerciseList();
@@ -174,6 +181,7 @@ public class FitnessApp {
 
     }
 
+    //EFFECTS: obtains sum of calories burn from each exercise object within the exercise list
     private void doGetTotalCalories() {
         int calorieNumber = newRoutine.getTotalCaloriesBurnt();
         System.out.println("You'll burn "
@@ -182,6 +190,9 @@ public class FitnessApp {
     }
 
     ///////////////////////////////////////////////ENTERING EXERCISE LEVEL////////////////////////////////////////////
+
+    //EFFECTS: Checks if Exercise name entered exists in the list, prints error message if it doesn't, otherwise, allows
+    //         user to choose
     private Exercise doSelectExercise(String chosen) {
         while (newRoutine.getExerciseFromName(chosen) == null) {
             System.out.println("Apologies, we don't have that in your library! Please try again?");
@@ -195,6 +206,8 @@ public class FitnessApp {
     }
     ///////////////////////////////////////////////ENTERING EXERCISE LEVEL/////////////////////////////////////////////
 
+    // MODIFIES: this
+    // EFFECTS: processes user input and command
     private void runExerciseMenu(Exercise esource) {
         boolean keepGoingExerciseLevel = true;
         String commandExerciseLevel;
@@ -222,20 +235,23 @@ public class FitnessApp {
         System.out.println("\nGoing Back to Exercise Menu");
     }
 
-
+    //MODIFIES: this
+    //EFFECTS: Removes Exercise selected in the list
     private void doRemoveExercise(Exercise esource) {
         newRoutine.removeExercise(esource);
         System.out.println("\n" + esource.getName() + " has been Removed! Here is your new RoutineList:\n");
         doGetExerciseLibrary();
     }
 
+    // EFFECTS: displays menu of options to user
     private void displayMenuExerciseLevel() {
         System.out.println("\t1 -> REMOVE EXERCISE");
         System.out.println("\t2 -> EDIT EXERCISE");
         System.out.println("\tq -> LEAVE THIS MENU");
     }
 
-    @SuppressWarnings("methodlength")
+
+//    @SuppressWarnings("methodlength")
     private void doEditExercise(Exercise esource) {
         boolean keepGoingExerciseEditLevel = true;
         String commandExerciseEditLevel;
@@ -279,7 +295,7 @@ public class FitnessApp {
 
 
 
-
+    // EFFECTS: displays menu of options to user
     private void displayMenuExerciseEditLevel() {
         System.out.println("\t1 -> CHANGE NAME");
         System.out.println("\t2 -> CHANGE REPETITION");
