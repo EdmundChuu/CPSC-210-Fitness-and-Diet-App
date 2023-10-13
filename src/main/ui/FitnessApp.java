@@ -84,7 +84,6 @@ public class FitnessApp {
     }
 
 
-
     //MODIFIES: this(adds enw object to list), Exercise object
     //EFFECTS: Adds new exercise and prevents duplication of exercise names
 
@@ -251,34 +250,39 @@ public class FitnessApp {
     }
 
 
-//    @SuppressWarnings("methodlength")
-private void doEditExercise(Exercise esource) {
-    String commandExerciseEditLevel;
-    do {
-        displayMenuExerciseEditLevel();
-        commandExerciseEditLevel = input.next();
-        switch (commandExerciseEditLevel) {
-            case "1":
-                System.out.println("\nAmazing! Enter a new name for your new Exercise Routine!");
-                esource.changeName(input.next()); break;
-            case "2":
-                System.out.println("\nAmazing! Enter your reps for your new Exercise Routine!");
-                esource.changeRepetition(input.nextInt()); break;
-            case "3":
-                System.out.println("\nAmazing! Enter your duration for your new Exercise Routine!");
-                esource.changeDuration(input.nextDouble()); break;
-            case "4":
-                System.out.println("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
-                esource.changeCalories(input.nextInt()); break;
-            case "q":  break;
-            default:
-                System.out.println("Selection not valid...");
-        }
-        if (!"q".equals(commandExerciseEditLevel)) {
-            System.out.println("\nNew exercise Routine " + esource.getName() + " has been edited!\n");
-        }
-    } while (!"q".equals(commandExerciseEditLevel));
-}
+    //    @SuppressWarnings("methodlength")
+    private void doEditExercise(Exercise esource) {
+        String commandExerciseEditLevel;
+        do {
+            displayMenuExerciseEditLevel();
+            commandExerciseEditLevel = input.next();
+            switch (commandExerciseEditLevel) {
+                case "1":
+                    System.out.println("\nAmazing! Enter a new name for your new Exercise Routine!");
+                    esource.changeName(input.next());
+                    break;
+                case "2":
+                    System.out.println("\nAmazing! Enter your reps for your new Exercise Routine!");
+                    esource.changeRepetition(input.nextInt());
+                    break;
+                case "3":
+                    System.out.println("\nAmazing! Enter your duration for your new Exercise Routine!");
+                    esource.changeDuration(input.nextDouble());
+                    break;
+                case "4":
+                    System.out.println("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
+                    esource.changeCalories(input.nextInt());
+                    break;
+                case "q":
+                    break;
+                default:
+                    System.out.println("Selection not valid...");
+            }
+            if (!"q".equals(commandExerciseEditLevel)) {
+                System.out.println("\nNew exercise Routine " + esource.getName() + " has been edited!\n");
+            }
+        } while (!"q".equals(commandExerciseEditLevel));
+    }
 
 //    private void doEditExercise(Exercise esource) {
 //        boolean keepGoingExerciseEditLevel = true;
@@ -306,7 +310,7 @@ private void doEditExercise(Exercise esource) {
 //                    esource.changeDuration(newDuration);
 //                    break;
 //                case "4":
-//                    System.out.println("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
+//                  System.out.println("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
 //                    int newCalorie = input.nextInt();
 //                    esource.changeCalories(newCalorie);
 //                case "q":
@@ -318,9 +322,6 @@ private void doEditExercise(Exercise esource) {
 //            System.out.println("\nNew exercise Routine " + esource.getName() + " has been edited!\n");
 //        }
 //    }
-
-
-
 
 
     // EFFECTS: displays menu of options to user
