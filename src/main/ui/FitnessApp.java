@@ -89,7 +89,7 @@ public class FitnessApp {
     //EFFECTS: Adds new exercise and prevents duplication of exercise names
 
     private void doNewExercise() {
-                String newName = "";  // force entry into loop
+        String newName = "";  // force entry into loop
 
         while (!newRoutine.noDuplicate(newName) || newName.equals("")) {
             if (newName.equals("")) {
@@ -272,8 +272,8 @@ public class FitnessApp {
                     break;
             }
             System.out.println("\nNew exercise Routine " + esource.getName() + " has been edited!\n");
-            }
         }
+    }
 
 
 
