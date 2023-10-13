@@ -7,12 +7,10 @@ public class Exercise {
     private double duration;          // Duration in seconds
     private int calories;             // Calories
 
-    /*
-     * REQUIRES: Exercise has a non-zero length, repetitions is positive integer, duration is positive double, calories
-     *           is positive integer
-     * EFFECTS: name of Exercise is set to name; repetitions, duration and calories should all be positive and assigned
-     *           to repetitions, duration adn calories respectively. Can be repeatedly called to add multiple exercises.
-     */
+    // REQUIRES: Exercise has a non-zero length, repetitions is positive integer, duration is positive double, calories
+    //           is positive integer
+    // EFFECTS: name of Exercise is set to name; repetitions, duration and calories should all be positive and assigned
+    //          to repetitions, duration adn calories respectively. Can be repeatedly called to add multiple exercises.
     public Exercise(String name, int repetitions, double duration, int calories) {
         this.name = name;
         this.repetitions = repetitions;
@@ -46,7 +44,6 @@ public class Exercise {
 
 
     public String getName() {
-
         return name;
     }
 

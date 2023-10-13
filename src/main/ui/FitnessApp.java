@@ -86,7 +86,6 @@ public class FitnessApp {
 
     //MODIFIES: this(adds enw object to list), Exercise object
     //EFFECTS: Adds new exercise and prevents duplication of exercise names
-
     private void doNewExercise() {
         String newName = "";  // force entry into loop
 
@@ -102,7 +101,7 @@ public class FitnessApp {
             }
         }
         int newReps = getIntInput("\nAmazing! Enter your reps for your new Exercise Routine!");
-        double newDuration = getDoubleInput("\nAmazing! Enter your duration for your new Exercise Routine!");
+        double newDuration = getDoubleInput();
         int newCalorie = getIntInput("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
 
         Exercise exercise = new Exercise(newName, newReps, newDuration, newCalorie);
@@ -128,10 +127,10 @@ public class FitnessApp {
     }
 
     //EFFECTS: is used in doNewExercise to check if the user input is a double
-    private double getDoubleInput(String prompt) {
+    private double getDoubleInput() {
         double inputValue;
         while (true) {
-            System.out.println(prompt);
+            System.out.println("\nAmazing! Enter your duration for your new Exercise Routine!");
             if (input.hasNextDouble()) {
                 inputValue = input.nextDouble();
                 break;
@@ -177,7 +176,6 @@ public class FitnessApp {
         for (Exercise s : routine) {
             System.out.println(index++ + 1 + ". " + s.getName());
         }
-
     }
 
     //EFFECTS: obtains sum of calories burn from each exercise object within the exercise list
@@ -249,8 +247,10 @@ public class FitnessApp {
         System.out.println("\tq -> LEAVE THIS MENU");
     }
 
+    // MODIFIES: this, esource (may modify exercise properties based on user input)
+    // EFFECTS: Handles the interactive editing of an exercise routine. and updates the exercise routine properties
+    //          as per user input. Also provides feedback on the status of the edits .
 
-    //    @SuppressWarnings("methodlength")
     private void doEditExercise(Exercise esource) {
         String commandExerciseEditLevel;
 
@@ -258,7 +258,7 @@ public class FitnessApp {
             displayMenuExerciseEditLevel();
             commandExerciseEditLevel = input.next();
 
-            handleCommand(commandExerciseEditLevel, esource);
+            handleExerciseEditCommand(commandExerciseEditLevel, esource);
 
             if (!"q".equals(commandExerciseEditLevel)) {
                 System.out.println("\nNew exercise Routine " + esource.getName() + " has been edited!\n");
@@ -266,23 +266,21 @@ public class FitnessApp {
         } while (!"q".equals(commandExerciseEditLevel));
     }
 
-    private void handleCommand(String command, Exercise esource) {
+    // EFFECTS: Handles the main command to edit an exercise within routine.
+    //          delegating the action to specific edit methods below.
+    private void handleExerciseEditCommand(String command, Exercise esource) {
         switch (command) {
             case "1":
-                System.out.println("\nAmazing! Enter a new name for your new Exercise Routine!");
-                esource.changeName(input.next());
+                handleNameEdit(esource);
                 break;
             case "2":
-                System.out.println("\nAmazing! Enter your reps for your new Exercise Routine!");
-                esource.changeRepetition(input.nextInt());
+                handleRepsEdit(esource);
                 break;
             case "3":
-                System.out.println("\nAmazing! Enter your duration for your new Exercise Routine!");
-                esource.changeDuration(input.nextDouble());
+                handleDurationEdit(esource);
                 break;
             case "4":
-                System.out.println("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
-                esource.changeCalories(input.nextInt());
+                handleCaloriesEdit(esource);
                 break;
             case "q":
                 break;
@@ -291,45 +289,43 @@ public class FitnessApp {
         }
     }
 
-//    private void doEditExercise(Exercise esource) {
-//        boolean keepGoingExerciseEditLevel = true;
-//        String commandExerciseEditLevel;
-//
-//        while (keepGoingExerciseEditLevel) {
-//            displayMenuExerciseEditLevel();
-//            commandExerciseEditLevel = input.next();
-//
-//            switch (commandExerciseEditLevel) {
-//                case "1":
-//                    System.out.println("\nAmazing! Enter a new name for your new Exercise Routine!");
-//                    String newName = input.next();
-//                    esource.changeName(newName);
-//                    keepGoingExerciseEditLevel = false;
-//                    break;
-//                case "2":
-//                    System.out.println("\nAmazing! Enter your reps for your new Exercise Routine!");
-//                    int newReps = input.nextInt();
-//                    esource.changeRepetition(newReps);
-//                    break;
-//                case "3":
-//                    System.out.println("\nAmazing! Enter your duration for your new Exercise Routine!");
-//                    double newDuration = input.nextDouble();
-//                    esource.changeDuration(newDuration);
-//                    break;
-//                case "4":
-//                  System.out.println("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine!");
-//                    int newCalorie = input.nextInt();
-//                    esource.changeCalories(newCalorie);
-//                case "q":
-//                    keepGoingExerciseEditLevel = false;
-//                default:
-//                    System.out.println("Selection not valid...");
-//                    break;
-//            }
-//            System.out.println("\nNew exercise Routine " + esource.getName() + " has been edited!\n");
-//        }
-//    }
+    // MODIFIES: this, esource (changes the name parameter, esource is an Exercise Object within the routine list)
+    // EFFECTS:  Handles the user's command to edit the name of the exercise routine.
+    //           Ensures the new name is unique and updates the exercise routine's name if valid.
 
+    private void handleNameEdit(Exercise esource) {
+        while (true) {
+            System.out.println("\nEnter a another name for your new Exercise Routine:");
+            String newName = input.next();
+            if (newRoutine.noDuplicate(newName)) {
+                esource.changeName(newName);
+                break;
+            } else {
+                System.out.println("\nExercise Name Already Exists! Pick a new One!");
+            }
+        }
+    }
+
+    // MODIFIES: this, esource (changes the repetition value, esource is an Exercise Object within the routine list)
+    // EFFECTS:  Updates the exercise routine's repetition value based on user input.
+    private void handleRepsEdit(Exercise esource) {
+        System.out.println("\nAmazing! Enter your reps for your new Exercise Routine:");
+        esource.changeRepetition(input.nextInt());
+    }
+
+    // MODIFIES: this, esource (changes the duration value, esource is an Exercise Object within the routine list)
+    // EFFECTS:  Updates the exercise routine's duration value based on user input.
+    private void handleDurationEdit(Exercise esource) {
+        System.out.println("\nAmazing! Enter your duration for your new Exercise Routine:");
+        esource.changeDuration(input.nextDouble());
+    }
+
+    // MODIFIES: this, esource (changes the duration value, esource is an Exercise Object within the routine list)
+    // EFFECTS:  Updates the exercise routine's duration value based on user input.
+    private void handleCaloriesEdit(Exercise esource) {
+        System.out.println("\nAmazing! Enter your estimated calories burnt for your new Exercise Routine:");
+        esource.changeCalories(input.nextInt());
+    }
 
     // EFFECTS: displays menu of options to user
     private void displayMenuExerciseEditLevel() {
