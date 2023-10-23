@@ -25,8 +25,10 @@ public class FitnessApp {
         runFitnessApp();
     }
 
+
     // MODIFIES: this
     // EFFECTS: processes user input
+    @SuppressWarnings("methodlength")
     private void runFitnessApp() {
         boolean keepGoingRoutineLevel = true;
         boolean checkSave = true;
@@ -48,7 +50,7 @@ public class FitnessApp {
             }
         }
 
-        while(checkSave) {
+        while (checkSave) {
             displayMenuSave();
             commandCheckSave = input.next();
             if (commandCheckSave.equals("s")) {

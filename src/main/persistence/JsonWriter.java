@@ -1,7 +1,8 @@
 package persistence;
-import model.RoutineList;
-import org.json.JSONObject;
 
+import model.RoutineList;
+
+import org.json.JSONObject;
 
 import java.io.*;
 
