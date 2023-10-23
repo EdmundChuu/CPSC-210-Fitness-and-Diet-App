@@ -63,10 +63,6 @@ public class Exercise implements Writable {
         return calories;
     }
 
-    public String toString() {
-        return name + ": " + repetitions + ": " + duration + ": " + calories;
-    }
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
