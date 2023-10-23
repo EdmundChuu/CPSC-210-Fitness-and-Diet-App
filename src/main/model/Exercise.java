@@ -1,7 +1,11 @@
 package model;
 
+import persistence.Writable;
+import org.json.JSONObject;
+
+
 // Represents an Exercise having a name, reps, duration(seconds) and estimated calorie intake(kcal)
-public class Exercise {
+public class Exercise implements Writable {
     private String name;              // Exercise Name id
     private int repetitions;          // Repetitions of exercise/Volume
     private double duration;          // Duration in seconds
@@ -59,7 +63,19 @@ public class Exercise {
         return calories;
     }
 
+    public String toString() {
+        return name + ": " + repetitions + ": " + duration + ": " + calories;
+    }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("repetitions", repetitions);
+        json.put("duration", duration);
+        json.put("calories", calories);
+        return json;
+    }
 }
 
 

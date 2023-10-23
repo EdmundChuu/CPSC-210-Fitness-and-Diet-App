@@ -2,27 +2,36 @@ package ui;
 
 import model.Exercise;
 import model.RoutineList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
-
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 //FitnessApp Application
 public class FitnessApp {
+    private static final String JSON_STORE = "./data/routineList.json";
     private RoutineList newRoutine;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the fitness application
-    public FitnessApp() {
+    public FitnessApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runFitnessApp();
     }
-
 
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runFitnessApp() {
         boolean keepGoingRoutineLevel = true;
+        boolean checkSave = true;
         String commandRoutineLevel;
+        String commandCheckSave;
 
         init();
 
@@ -38,7 +47,39 @@ public class FitnessApp {
                 processCommandRoutineLevel(commandRoutineLevel);
             }
         }
+
+        while(checkSave) {
+            displayMenuSave();
+            commandCheckSave = input.next();
+            if (commandCheckSave.equals("s")) {
+                processCommandCheckSave(commandCheckSave);
+                checkSave = false;
+            } else {
+                checkSave = false;
+            }
+        }
+
         System.out.println("\nGoodbye!");
+    }
+
+    //EFFECTS:Displays the Save Reminder Menu
+    private void displayMenuSave() {
+        System.out.println("\nSave your amazing worklist?");
+        System.out.println("\ts -> SAVE ROUTINE LIST TO FILE");
+        System.out.println("\tn -> NO :(");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user command
+    private void processCommandCheckSave(String command) {
+        switch (command) {
+            case "s":
+                saveRoutineList();
+                break;
+            default:
+                System.out.println("Selection not valid...");
+                break;
+        }
     }
 
     // EFFECTS: displays menu of options to user
@@ -48,6 +89,8 @@ public class FitnessApp {
         System.out.println("\t2 -> SELECT EXERCISE");
         System.out.println("\t3 -> CLEAR EXERCISE ROUTINE");
         System.out.println("\t4 -> GET TOTAL CALORIES");
+        System.out.println("\tl -> LOAD ROUTINE LIST FROM FILE");
+        System.out.println("\ts -> SAVE ROUTINE LIST TO FILE");
         System.out.println("\tq -> LEAVE THE APP");
     }
 
@@ -60,21 +103,31 @@ public class FitnessApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: conducts a deposit transaction
+    // EFFECTS: processes user command
     private void processCommandRoutineLevel(String command) {
         switch (command) {
             case "1":
                 doNewExercise();
                 break;
+
             case "2":
                 doChooseExercise();
                 break;
+
             case "3":
                 doClearExerciseList();
                 break;
 
             case "4":
                 doGetTotalCalories();
+                break;
+
+            case "l":
+                loadRoutineList();
+                break;
+
+            case "s":
+                saveRoutineList();
                 break;
 
             default:
@@ -334,5 +387,29 @@ public class FitnessApp {
         System.out.println("\t3 -> CHANGE DURATION(SECONDS)");
         System.out.println("\t4 -> CHANGE CALORIES");
         System.out.println("\tq -> LEAVE THIS MENU");
+    }
+
+    //////////////////////////////////////////////////////SAVE FILE STUFF//////////////////////////////////////////////
+    // EFFECTS: saves the workroom to file
+    private void saveRoutineList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(newRoutine);
+            jsonWriter.close();
+            System.out.println("Saved " + newRoutine.getRoutineName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadRoutineList() {
+        try {
+            newRoutine = jsonReader.read();
+            System.out.println("Loaded " + newRoutine.getRoutineName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

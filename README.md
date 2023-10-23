@@ -18,4 +18,9 @@ This project is interesting to me because I exercise regularly and I am familiar
 - As a user I want to view a list of names of Exercises in my exercise plan
 - As a user, I want to be able to mark an exercise as completed in my Exercise Plan
 - As a user, I want to be able to remove a Exercise from my Exercise Plan
-- As a user, I wat to edit a exercise within a Routine List
+- As a user, I wat to edit an exercise within a Routine List
+
+- As a user, I want to be able to save my Routine list to file (if I so choose)
+- As a user, I want to be able to be able to load my Routine List from file (if I so choose)
+- As a user, when I select the quit option from the application menu, I want to be reminded to save my changes list to file and have the option to do so or not.
+- As a user, when I start the application, I want to be given the option to load my Routine list from file.

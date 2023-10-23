@@ -1,19 +1,27 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.List;
 import java.util.ArrayList;
 
 
-// EFFECTS: Represents a RoutineList Object a routineNName, and an empty ;ist of exercises
-public class RoutineList {
-    private final String routineName;
-    private final List<Exercise> exercises;
+// EFFECTS: Represents a RoutineList Object a routineName, and an empty list of exercises
+public class RoutineList implements Writable {
+    private String routineName;
+    private List<Exercise> exercises;
 
     //  EFFECTS: name of Routine is set to routineName,  total calories is set to 0, and also holds an empty List of
     //           Exercise objects
     public RoutineList(String routineName) {
         this.routineName = routineName;
         this.exercises = new ArrayList<>();
+    }
+
+    public String getRoutineName() {
+        return routineName;
     }
 
     // EFFECTS: Adds up total calories of each exercise within the list and returns it
@@ -56,7 +64,7 @@ public class RoutineList {
     }
 
     // MODIFIES: this
-    // EFFECTS: Adds an Exercise Object to the exercise list within RoutineList and returns false if unique
+    // EFFECTS: Adds an Exercise Object to the exercise list within RoutineList and returns true624 if unique
     public boolean addExercise(Exercise exercise) {
         if (noDuplicate(exercise.getName())) {
             exercises.add(exercise);
@@ -87,5 +95,22 @@ public class RoutineList {
         return this.exercises.isEmpty();
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("routineName", routineName);
+        json.put("exercises", exercisesToJson());
+        return json;
+    }
 
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray exercisesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Exercise t : exercises) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
+    }
 }

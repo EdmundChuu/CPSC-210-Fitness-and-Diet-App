@@ -1,0 +1,9 @@
+{
+    "exercises": [{
+        "duration": 2,
+        "name": "dog",
+        "calories": 3,
+        "repetitions": 1
+    }],
+    "routineName": "single routine"
+}
