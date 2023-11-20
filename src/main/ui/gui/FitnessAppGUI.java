@@ -20,15 +20,21 @@ public class FitnessAppGUI extends JFrame {
     private JTable exerciseListTable; // Added JTable for exercise list
     private final JsonWriter jsonWriter;
     private final JsonReader jsonReader;
+    private boolean changesMade;
+
 
     public FitnessAppGUI() throws FileNotFoundException {
         super("Fitness App");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(1080, 2040);
 
         newRoutine = new RoutineList("single routine");
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+
+        JLabel welcomeLabel = new JLabel("Hello, my name is Astraea! How may I help you today?");
+        welcomeLabel.setHorizontalAlignment(JLabel.CENTER);  // Center the text
+        mainPanel.add(welcomeLabel, BorderLayout.NORTH);
 
         JTabbedPane tabbedPane = new JTabbedPane();
         JPanel menuPanel = createMenuPanel();
@@ -44,25 +50,27 @@ public class FitnessAppGUI extends JFrame {
 
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+
+        changesMade = false;
     }
 
     private JPanel createMenuPanel() {
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new GridLayout(7, 1));
 
-        addButton("ADD EXERCISE ROUTINE", e -> doNewExercise(), menuPanel);
+        addButtonWithHover("ADD EXERCISE ROUTINE", e -> doNewExercise(), menuPanel);
 
-        addButton("SELECT EXERCISE", e -> doChooseExercise(), menuPanel);
+        addButtonWithHover("SELECT EXERCISE", e -> doChooseExercise(), menuPanel);
 
-        addButton("CLEAR EXERCISE ROUTINE", e -> doClearExerciseList(), menuPanel);
+        addButtonWithHover("CLEAR EXERCISE ROUTINE", e -> doClearExerciseList(), menuPanel);
 
-        addButton("GET TOTAL CALORIES", e -> doGetTotalCalories(), menuPanel);
+        addButtonWithHover("GET TOTAL CALORIES", e -> doGetTotalCalories(), menuPanel);
 
-        addButton("LOAD ROUTINE LIST FROM FILE", e -> loadRoutineList(), menuPanel);
+        addButtonWithHover("LOAD ROUTINE LIST FROM FILE", e -> loadRoutineList(), menuPanel);
 
-        addButton("SAVE ROUTINE LIST TO FILE", e -> saveRoutineList(), menuPanel);
+        addButtonWithHover("SAVE ROUTINE LIST TO FILE", e -> saveRoutineList(), menuPanel);
 
-        addButton("LEAVE THE APP", e -> System.exit(0), menuPanel);
+        addButtonWithHover("LEAVE THE APP", e -> doLeave(), menuPanel);
 
         return menuPanel;
     }
@@ -85,11 +93,33 @@ public class FitnessAppGUI extends JFrame {
         return exerciseListPanel;
     }
 
-    private void addButton(String buttonText, ActionListener actionListener, JPanel panel) {
-        JButton button = new JButton(buttonText);
+    private void addButtonWithHover(String buttonText, ActionListener actionListener, JPanel panel) {
+        CustomButton button = new CustomButton(buttonText);
         button.addActionListener(actionListener);
         panel.add(button);
     }
+
+
+    private int showOptionsDialogLeave() {
+        String[] options = {"SAVE ROUTINE LIST TO FILE", "NO :("};
+        return JOptionPane.showOptionDialog(this, "Save your amazing worklist?",
+                "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                null, options, options[0]);
+    }
+
+    private void doLeave() {
+        if (changesMade) {
+            int saveChoice = showOptionsDialogLeave();
+            if (saveChoice == 0) {
+                saveRoutineList();
+            }
+        }
+
+        JOptionPane.showMessageDialog(null, "Goodbye!", "Exiting", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
+    }
+
+
 
     private void doNewExercise() {
         String newName = "";
@@ -100,6 +130,7 @@ public class FitnessAppGUI extends JFrame {
             } else if (!newRoutine.noDuplicate(newName)) {
                 newName = JOptionPane.showInputDialog("Exercise Name Already Exists! Pick a new One!");
             }
+            changesMade = true;
         }
 
         int newReps = getIntInput("Amazing! Enter your reps for your new Exercise Routine!");
@@ -161,6 +192,7 @@ public class FitnessAppGUI extends JFrame {
         newRoutine.clearRoutine();
         JOptionPane.showMessageDialog(null, "Your list is now Empty! Add something, quickly!");
         updateExerciseListPanel();
+        changesMade = true;
     }
 
     private void doGetTotalCalories() {
@@ -178,12 +210,10 @@ public class FitnessAppGUI extends JFrame {
 
     private void saveRoutineList() {
         try {
-            // Assuming jsonWriter is an instance of your JSON writer class
             jsonWriter.open();
             jsonWriter.write(newRoutine);
             jsonWriter.close();
 
-            // After saving, update the exercise list panel
             updateExerciseListPanel();
 
             JOptionPane.showMessageDialog(null, "Saved " + newRoutine.getRoutineName()
@@ -195,10 +225,8 @@ public class FitnessAppGUI extends JFrame {
 
     private void loadRoutineList() {
         try {
-            // Assuming jsonReader is an instance of your JSON reader class
             newRoutine = jsonReader.read();
 
-            // After loading, update the exercise list panel
             updateExerciseListPanel();
 
             JOptionPane.showMessageDialog(null, "Loaded " + newRoutine.getRoutineName()
@@ -206,6 +234,7 @@ public class FitnessAppGUI extends JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE);
         }
+        changesMade = true;
     }
 
     private void updateExerciseListPanel() {
@@ -270,6 +299,7 @@ public class FitnessAppGUI extends JFrame {
         JOptionPane.showMessageDialog(this, esource.getName() + " has been removed!",
                 "Exercise Removed", JOptionPane.INFORMATION_MESSAGE);
         updateExerciseListPanel();
+        changesMade = true;
     }
 
     private void doEditExercise(Exercise esource) {
@@ -293,6 +323,7 @@ public class FitnessAppGUI extends JFrame {
                 break;
             }
         }
+        changesMade = true;
     }
 
     private int showOptionDialog(Object[] options) {

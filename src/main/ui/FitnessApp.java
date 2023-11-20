@@ -17,8 +17,8 @@ public class FitnessApp {
     private static final String JSON_STORE = "./data/routineList.json";
     private RoutineList newRoutine;
     private Scanner input;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
 
     // EFFECTS: runs the fitness application
     public FitnessApp() throws FileNotFoundException {
@@ -76,13 +76,10 @@ public class FitnessApp {
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommandCheckSave(String command) {
-        switch (command) {
-            case "s":
-                saveRoutineList();
-                break;
-            default:
-                System.out.println("Selection not valid...");
-                break;
+        if (command.equals("s")) {
+            saveRoutineList();
+        } else {
+            System.out.println("Selection not valid...");
         }
     }
 

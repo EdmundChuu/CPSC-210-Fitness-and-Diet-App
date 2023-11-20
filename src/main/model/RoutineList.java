@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 // EFFECTS: Represents a RoutineList Object a routineName, and an empty list of exercises
 public class RoutineList implements Writable {
-    private String routineName;
-    private List<Exercise> exercises;
+    private final String routineName;
+    private final List<Exercise> exercises;
 
     //  EFFECTS: name of Routine is set to routineName,  total calories is set to 0, and also holds an empty List of
     //           Exercise objects
