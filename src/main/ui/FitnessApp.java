@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+
+
 //FitnessApp Application
 public class FitnessApp {
     private static final String JSON_STORE = "./data/routineList.json";
