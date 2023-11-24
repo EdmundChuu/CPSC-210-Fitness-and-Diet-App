@@ -22,7 +22,16 @@ public class FitnessAppGUI extends JFrame {
     private final JsonReader jsonReader;
     private boolean changesMade;
 
+//MODIFIES:
+//this (object of the FitnessAppGUI class)
+// newRoutine
+// jsonWriter
+// jsonReader
+// changesMade
 
+    //EFFECTS:
+//Initializes the FitnessAppGUI frame, creates a new RoutineList object,
+// sets up the main panel with tabs, and initializes JSON reader and writer.
     public FitnessAppGUI() throws FileNotFoundException {
         super("Fitness App");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,6 +63,9 @@ public class FitnessAppGUI extends JFrame {
         changesMade = false;
     }
 
+
+    //EFFECTS:
+    //Creates a JPanel for the menu tab, adds buttons with hover effect.
     private JPanel createMenuPanel() {
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new GridLayout(7, 1));
@@ -74,24 +86,29 @@ public class FitnessAppGUI extends JFrame {
 
         return menuPanel;
     }
+    //MODIFIES:
+    //exerciseListTable
+    //EFFECTS:
+    //Creates a JPanel for the exercise list tab, initializes a JTable with a DefaultTableModel.
 
     private JPanel createExerciseListPanel() {
         JPanel exerciseListPanel = new JPanel();
         exerciseListPanel.setLayout(new BorderLayout());
 
-        // Create the table model
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Exercise Name"); // Add a column for Exercise Name
 
-        // Create the JTable using the model
         exerciseListTable = new JTable(model);
 
-        // Add the JTable to a scroll pane
         JScrollPane scrollPane = new JScrollPane(exerciseListTable);
         exerciseListPanel.add(scrollPane, BorderLayout.CENTER);
 
         return exerciseListPanel;
     }
+    //MODIFIES:
+    //panel
+    //EFFECTS:
+    //Creates a CustomButton with hover effect and adds it to the specified panel.
 
     private void addButtonWithHover(String buttonText, ActionListener actionListener, JPanel panel) {
         CustomButton button = new CustomButton(buttonText);
@@ -99,6 +116,8 @@ public class FitnessAppGUI extends JFrame {
         panel.add(button);
     }
 
+    //EFFECTS:
+    //Shows a confirmation dialog with options and returns the user's choice.
 
     private int showOptionsDialogLeave() {
         String[] options = {"SAVE ROUTINE LIST TO FILE", "NO :("};
@@ -106,6 +125,9 @@ public class FitnessAppGUI extends JFrame {
                 "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
                 null, options, options[0]);
     }
+
+    //EFFECTS:
+    //Checks if changes are made, prompts the user to save, and exits the application.
 
     private void doLeave() {
         if (changesMade) {
@@ -120,6 +142,13 @@ public class FitnessAppGUI extends JFrame {
     }
 
 
+    //MODIFIES:
+    //newRoutine
+    //changesMade
+    //exerciseListTable
+
+    //EFFECTS:
+    //Prompts the user to enter details for a new exercise and adds it to the routine.
 
     private void doNewExercise() {
         String newName = "";
@@ -188,12 +217,21 @@ public class FitnessAppGUI extends JFrame {
         return inputValue;
     }
 
+    //MODIFIES:
+    //newRoutine, changesMade, exerciseListTable
+
+    //EFFECTS:
+    //Clears the exercise list and updates the GUI.
+
     private void doClearExerciseList() {
         newRoutine.clearRoutine();
         JOptionPane.showMessageDialog(null, "Your list is now Empty! Add something, quickly!");
         updateExerciseListPanel();
         changesMade = true;
     }
+
+    //EFFECTS:
+    //Calculates and displays the total calories burnt for the routine.
 
     private void doGetTotalCalories() {
         int calorieNumber = newRoutine.getTotalCaloriesBurnt();
@@ -207,6 +245,11 @@ public class FitnessAppGUI extends JFrame {
         }
     }
 
+    //MODIFIES:
+    //jsonWriter, exerciseListTable
+
+    //EFFECTS:
+    //Saves the routine list to a JSON file.
 
     private void saveRoutineList() {
         try {
@@ -223,6 +266,12 @@ public class FitnessAppGUI extends JFrame {
         }
     }
 
+    //MODIFIES:
+    //newRoutine, exerciseListTable
+
+    //EFFECTS:
+    //Loads the routine list from a JSON file.
+
     private void loadRoutineList() {
         try {
             newRoutine = jsonReader.read();
@@ -237,6 +286,12 @@ public class FitnessAppGUI extends JFrame {
         changesMade = true;
     }
 
+    //MODIFIES:
+    //exerciseListTable
+
+    //EFFECTS:
+    //Updates the exercise list panel with the current exercise list.
+
     private void updateExerciseListPanel() {
         DefaultTableModel model = (DefaultTableModel) exerciseListTable.getModel();
         model.setRowCount(0);
@@ -249,6 +304,10 @@ public class FitnessAppGUI extends JFrame {
     }
 
     /////////////////////////////////////////ENTERING EXERCISE LEVEL /////////////////////////////////////////////////
+
+    //EFFECTS:
+    //Displays a popup menu for choosing an exercise from the list.
+
     private void doChooseExercise() {
         List<Exercise> exerciseList = newRoutine.getExerciseList();
 
@@ -267,6 +326,9 @@ public class FitnessAppGUI extends JFrame {
             exerciseMenu.show(this, getWidth() / 2, getHeight() / 2);
         }
     }
+
+    //EFFECTS:
+    //Shows details of a selected exercise.
 
     private void showExerciseDetails(Exercise exercise) {
         JPanel panel = new JPanel(new GridLayout(0, 1));
@@ -294,6 +356,12 @@ public class FitnessAppGUI extends JFrame {
         JOptionPane.showMessageDialog(this, panel, "Exercise Details", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    //MODIFIES:
+    //newRoutine, exerciseListTable, changesMade
+
+    //EFFECTS:
+    //Removes the selected exercise from the routine.
+
     private void doRemoveExercise(Exercise esource) {
         newRoutine.removeExercise(esource);
         JOptionPane.showMessageDialog(this, esource.getName() + " has been removed!",
@@ -301,6 +369,12 @@ public class FitnessAppGUI extends JFrame {
         updateExerciseListPanel();
         changesMade = true;
     }
+
+    //MODIFIES:
+    //esource, changesMade
+
+    //EFFECTS:
+    //Edits the details of a selected exercise.
 
     private void doEditExercise(Exercise esource) {
         Object[] options = {"Edit Name", "Edit Repetitions", "Edit Duration", "Edit Calories", "Leave"};
@@ -313,18 +387,25 @@ public class FitnessAppGUI extends JFrame {
             }
 
             switch (choice) {
-                case 0: editName(esource);
-                break;
-                case 1: editRepetitions(esource);
-                break;
-                case 2: editDuration(esource);
-                break;
-                case 3: editCalories(esource);
-                break;
+                case 0:
+                    editName(esource);
+                    break;
+                case 1:
+                    editRepetitions(esource);
+                    break;
+                case 2:
+                    editDuration(esource);
+                    break;
+                case 3:
+                    editCalories(esource);
+                    break;
             }
         }
         changesMade = true;
     }
+
+    //EFFECTS:
+    //Shows a dialog with options and returns the user's choice.
 
     private int showOptionDialog(Object[] options) {
         return JOptionPane.showOptionDialog(
@@ -339,6 +420,12 @@ public class FitnessAppGUI extends JFrame {
         );
     }
 
+    //MODIFIES:
+    //esource
+    //changesMade
+    //EFFECTS:
+    //Edits the name of a selected exercise.
+
     private void editName(Exercise esource) {
         String newName = showInputDialog("Enter a new name:", esource.getName());
         if (newName != null && !newName.equals("")) {
@@ -347,17 +434,34 @@ public class FitnessAppGUI extends JFrame {
         }
     }
 
+    //MODIFIES:
+    //esource
+    //changesMade
+    //EFFECTS:
+    //Edits the repetitions of a selected exercise.
     private void editRepetitions(Exercise esource) {
         int newReps = getIntInputs("Enter new repetitions:", esource.getReps());
         esource.changeRepetition(newReps);
         showMessageDialog("Repetitions has been updated to: " + newReps);
     }
 
+    //MODIFIES:
+    //esource
+    //changesMade
+
+    //EFFECTS:
+    //Edits the duration of a selected exercise.
     private void editDuration(Exercise esource) {
         double newDuration = getDoubleInputs(esource.getDuration());
         esource.changeDuration(newDuration);
         showMessageDialog("Duration has been updated to: " + newDuration);
     }
+
+    //MODIFIES:
+    //esource
+    //changesMade
+    //EFFECTS:
+    //Edits the calories of a selected exercise.
 
     private void editCalories(Exercise esource) {
         int newCalories = getIntInputs("Enter new calories:", esource.getCalories());
@@ -365,18 +469,30 @@ public class FitnessAppGUI extends JFrame {
         showMessageDialog("Calories has been updated to: " + newCalories);
     }
 
+
+    //EFFECTS:
+    //Shows an input dialog with the specified prompt and default value.
+    //Returns the user's input as a String.
     private String showInputDialog(String prompt, String defaultValue) {
         return JOptionPane.showInputDialog(null, prompt, defaultValue);
     }
 
+    //EFFECTS:
+    //Shows an input dialog with the specified prompt and default value for integer input.
+    //Returns the user's input as an integer.
     private int getIntInputs(String prompt, int defaultValue) {
         return Integer.parseInt(showInputDialog(prompt, String.valueOf(defaultValue)));
     }
 
+    //EFFECTS:
+    //Shows an input dialog with the specified prompt and default value for double input.
+    //Returns the user's input as a double.
     private double getDoubleInputs(double defaultValue) {
         return Double.parseDouble(showInputDialog("Enter new duration:", String.valueOf(defaultValue)));
     }
 
+    //EFFECTS:
+    //Shows a message dialog displaying a goodbye message.
     private void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(null, message);
     }

@@ -6,6 +6,11 @@ import java.awt.*;
 public class CustomButton extends JButton {
     private boolean isHovered = false;
 
+    //MODIFIES:
+    //this
+    //EFFECTS:
+    //Initializes the button with the specified text.
+    //Adds a MouseListener to track mouse enter and exit events for hover effects.
     public CustomButton(String text) {
         super(text);
 
@@ -23,11 +28,15 @@ public class CustomButton extends JButton {
     }
 
     @Override
+    //MODIFIES:
+    //this
+    //EFFECTS:
+    //Draws the button with a smiley face icon on right when hovered.
+    //Modifies the appearance of the button based on the isHovered state.
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         if (isHovered) {
-            // Draw the smiley face icon when hovered
             int smileySize = 20;
             int smileyX = getWidth() - smileySize - 5;
             int smileyY = getHeight() / 2 - smileySize / 2;
@@ -46,6 +55,11 @@ public class CustomButton extends JButton {
         }
     }
 
+    //MODIFIES:
+    //this
+    //EFFECTS:
+    //Sets the isHovered flag to false.
+    //Calls repaint() to update the button appearance.
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame();
