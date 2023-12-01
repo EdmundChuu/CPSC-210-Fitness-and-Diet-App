@@ -1,5 +1,7 @@
 package ui.gui;
 
+import model.EventLog;
+import model.Event;
 import model.Exercise;
 import model.RoutineList;
 import persistence.JsonReader;
@@ -135,12 +137,22 @@ public class FitnessAppGUI extends JFrame {
             if (saveChoice == 0) {
                 saveRoutineList();
             }
+
         }
+        printLoggedEvents();
 
         JOptionPane.showMessageDialog(null, "Goodbye!", "Exiting", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
     }
 
+    // EFFECTS:
+    // Prints all logged events to the console.
+    private void printLoggedEvents() {
+        System.out.println("Logged Events:");
+        for (Event event : EventLog.getInstance()) {
+            System.out.println(event);
+        }
+    }
 
     //MODIFIES:
     //newRoutine

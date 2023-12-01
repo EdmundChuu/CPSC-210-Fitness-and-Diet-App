@@ -68,6 +68,7 @@ public class RoutineList implements Writable {
     public boolean addExercise(Exercise exercise) {
         if (noDuplicate(exercise.getName())) {
             exercises.add(exercise);
+            EventLog.getInstance().logEvent(new Event("Exercise added to routine list: " + exercise.getName()));
             return true;
         }
         return false;
@@ -77,12 +78,15 @@ public class RoutineList implements Writable {
     // EFFECTS: Removes  an Exercise Object from the exercise list within RoutineList
     public void removeExercise(Exercise exercise) {
         exercises.remove(exercise);
+        EventLog.getInstance().logEvent(new Event("Exercise removed from routine list: " + exercise.getName()));
     }
 
     //MODIFIES: this
     // EFFECTS: Removes all Exercise Objects to the exercise list within RoutineList
     public void clearRoutine() {
         exercises.clear();
+
+        EventLog.getInstance().logEvent(new Event("Routine list cleared."));
     }
 
     // EFFECTS: Obtains the size exercise list within RoutineList

@@ -26,24 +26,32 @@ public class Exercise implements Writable {
     // EFFECTS: changes the name variable
     public void changeName(String newName) {
         this.name = newName;
+
+        EventLog.getInstance().logEvent(new Event("Name changed for exercise: " + this.getName()));
     }
 
     // MODIFIES: this
     // EFFECTS: changes the name variable
     public void changeRepetition(int newRepetition) {
         this.repetitions = newRepetition;
+
+        EventLog.getInstance().logEvent(new Event("Repetitions changed for exercise: " + this.getName()));
     }
 
     // MODIFIES: this
     // EFFECTS: changes the Calories variable
     public void changeCalories(int newCalories) {
         this.calories = newCalories;
+
+        EventLog.getInstance().logEvent(new Event("Calories changed for exercise: " + this.getName()));
     }
 
     // MODIFIES: this
     // EFFECTS: changes the Duration variable
     public void changeDuration(double newDuration) {
         this.duration = newDuration;
+
+        EventLog.getInstance().logEvent(new Event("Duration changed for exercise: " + this.getName()));
     }
 
 

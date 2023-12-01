@@ -24,3 +24,17 @@ This project is interesting to me because I exercise regularly and I am familiar
 - As a user, I want to be able to be able to load my Routine List from file (if I so choose)
 - As a user, when I select the quit option from the application menu, I want to be reminded to save my changes list to file and have the option to do so or not.
 - As a user, when I start the application, I want to be given the option to load my Routine list from file.
+
+UML Diagram
+![img.png](img.png)
+
+Phase 4: Task 3
+The design of the application appears well-structured, but there are a few areas where refactoring could enhance 
+maintainability and flexibility. One potential improvement is the introduction of an interface or abstract class for the
+classes involved in file I/O operations (specifically JsonWriter and JsonReader). This way, the code could be adapted 
+more easily to support different file formats or sources in the future. Furthermore, I think that for the FitnessApp, it
+demonstrates a separation of concerns, encapsulating user interface logic while interacting seamlessly with the 
+underlying model components. However we could implement robust input validation to insure that the user inputs for 
+repetitions, durationa dn calories are valid numeric values rather than doing them individually, even tho we have a 
+central method called checkinputint etc. Furthermore, we can refactor the conditional locks in the fitnessAppgui such as
+block checking if newName is empty or already exists could be a separate method for organization nd readability.
